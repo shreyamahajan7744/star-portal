@@ -1,0 +1,33 @@
+li {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    margin: 20px 0;
+    width: 60vw;
+    padding: 20px;
+}
+
+.planet-details p {
+    width: 60vw;
+    display: flex;
+    padding: 7.5px 20px
+}
+
+.planet-details p span {
+    text-align: left;
+}
+.planet-details p span:first-of-type {
+    flex-basis: 60%;
+}
+
+.planet-details {
+    margin-top: 30px;
+}
+.planet-details p:nth-of-type(2n+1){
+    background: #ded
+}
+.planet-details p:nth-of-type(2n+2){
+    background: #cec
+}
