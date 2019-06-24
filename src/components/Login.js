@@ -1,5 +1,6 @@
 import React from 'react';
 import { search } from '../utils';
+import { Redirect } from 'react-router-dom';
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -49,8 +50,11 @@ export default class Login extends React.Component {
   }
 
   render() {
+    if (this.props.loggedIn) {
+      return <Redirect to="/search" />
+    }
     return (
-      <div class="form-container">
+      <div className="form-container">
         <form onSubmit={this.handleSubmit}>
         <label>
           Username:

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import '../css/planet-search.css'
 import { search, processPlanets } from '../utils';
 import PlanetSearchForm from './PlanetSearchForm';
@@ -46,19 +47,21 @@ export default class PlanetSearch extends React.Component {
     }
 
     render() {
+        if (!this.props.loggedIn) {
+            return <Redirect to="/" />
+        }
         if (this.state.selectedPlanet) {
             return (
                 <div className="form-container">
-                    <PlanetDetails planet={this.state.selectedPlanet} close={this.closeSelectedPlanet.bind(this)}/>
+                    <PlanetDetails planet={this.state.selectedPlanet} close={this.closeSelectedPlanet.bind(this)} />
                 </div>
             )
-        } else {
-            return (
-                <div className="form-container">
-                    <PlanetSearchForm query={this.state.query} queryError={this.state.queryError} handleChange={this.handleChange.bind(this)} />
-                    <PlanetList planets={this.state.planets} selectPlanet={this.selectPlanet.bind(this)} />
-                </div>
-            );
         }
+        return (
+            <div className="form-container">
+                <PlanetSearchForm query={this.state.query} queryError={this.state.queryError} handleChange={this.handleChange.bind(this)} />
+                <PlanetList planets={this.state.planets} selectPlanet={this.selectPlanet.bind(this)} />
+            </div>
+        );
     }
 }

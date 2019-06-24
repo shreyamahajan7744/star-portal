@@ -4,6 +4,7 @@ import './css/star-wars-font.css';
 import Login from './components/Login';
 import PlanetSearch from './components/PlanetSearch';
 import Header from './components/Header';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,9 +19,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header changeLoginState={this.changeLoginState.bind(this)} loggedIn={this.state.loggedIn}/>
+        <Header changeLoginState={this.changeLoginState.bind(this)} loggedIn={this.state.loggedIn} />
         <div className="content-wrapper">
-        {this.state.loggedIn ? <PlanetSearch /> : <Login changeLoginState={this.changeLoginState.bind(this)} />}
+          <Router>
+            <Route exact path="/" render={() => <Login changeLoginState={this.changeLoginState} loggedIn={this.state.loggedIn} />} />
+            <Route exact path="/search" render={() => <PlanetSearch loggedIn={this.state.loggedIn} />} />
+          </Router>
         </div>
       </div>
     );
